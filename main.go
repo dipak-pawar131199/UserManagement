@@ -7,6 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 
 	"user-api/internal/config"
+	"user-api/internal/handler"
 )
 
 func main() {
@@ -23,5 +24,10 @@ func main() {
 			"Message": "hello from gin",
 		})
 	})
+	// r.POST("user-api/login", func(ctx *gin.Context) {
+	// 	service.Login(ctx)
+	// })
+	r.POST("user/api/login", handler.LoginHandler)
+
 	r.Run(":8080")
 }
