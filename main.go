@@ -8,6 +8,8 @@ import (
 
 	"user-api/internal/config"
 	"user-api/internal/handler"
+	"user-api/internal/middleware"
+
 )
 
 func main() {
@@ -28,6 +30,9 @@ func main() {
 	// 	service.Login(ctx)
 	// })
 	r.POST("user/api/login", handler.LoginHandler)
+	protect := r.Group("/user")
 
+	protect.Use(middleware.AuthMiddleware())
+	protect.POST("", handler.GetUser)
 	r.Run(":8080")
 }
